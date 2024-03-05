@@ -1,0 +1,22 @@
+<form [formGroup]="fromData">
+    <label>UserName :-</label>
+    <input type="text" placeholder="Enter the Username" formControlName = 'username'><br>
+    <span *ngIf="usernameValidation.touched && usernameValidation.errors?.['required']" style="color: red;">*Username Filed Is Required</span><br>
+    
+    <label>UserEmail :-</label>
+    <input type="text" placeholder="Enter the Email" formControlName = 'email'><br>
+    <span *ngIf="emailValidation.touched && emailValidation.errors?.['required']" style="color: red;">*Email filed Is Required</span>
+    <span *ngIf="emailValidation.touched && emailValidation.errors?.['validEmail']">*Enter the valid Email.</span><br>
+
+    <label>Roles :-</label>
+    <select formControlName = 'roles'>  
+        <option value="User">User</option>
+        <option value="Admin">Admin</option>
+    </select><br><br>
+    <button  (click)="submitData()">Submitt</button>
+</form>
+
+
+<a routerLink="/userlist">AllUser</a>
+<router-outlet></router-outlet>
+<!-- <app-user-list></app-user-list> -->

@@ -1,0 +1,64 @@
+{
+  "user": [
+    {
+      "id": "be76",
+      "username": "user",
+      "email": "user@gmail.com",
+      "roles": "User"
+    },
+    {
+      "id": "fd04",
+      "username": "name",
+      "email": "name@gmail.com",
+      "roles": "Admin"
+    },
+    {
+      "id": "be76",
+      "username": "user",
+      "email": "user@gmail.com",
+      "roles": "User"
+    },
+    {
+      "id": "fd04",
+      "username": "name",
+      "email": "name@gmail.com",
+      "roles": "Admin"
+    },
+    {
+      "id": "be76",
+      "username": "user",
+      "email": "user@gmail.com",
+      "roles": "User"
+    },
+    {
+      "id": "fd04",
+      "username": "name",
+      "email": "name@gmail.com",
+      "roles": "Admin"
+    },
+    {
+      "id": "be76",
+      "username": "user",
+      "email": "user@gmail.com",
+      "roles": "User"
+    },
+    {
+      "id": "fd04",
+      "username": "name",
+      "email": "name@gmail.com",
+      "roles": "Admin"
+    },
+    {
+      "id": "be76",
+      "username": "user",
+      "email": "user@gmail.com",
+      "roles": "User"
+    },
+    {
+      "id": "fd04",
+      "username": "name",
+      "email": "name@gmail.com",
+      "roles": "Admin"
+    }
+  ]
+}

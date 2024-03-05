@@ -1,0 +1,38 @@
+<div>
+    <h2>Filter </h2>
+<input
+  type="text"
+  placeholder="Enter User name :-"
+  (input)="search(ele)"
+  #ele
+/>
+</div>
+
+<hr>
+<div
+  *ngFor="
+    let item of userList
+      | paginate
+        : { itemsPerPage: tableSize, currentPage: page, totalItems: count };
+    let i = index
+  ">
+  <h4>UserName :- {{ item.username }}</h4>
+  <h4>Emai :- {{ item.email }}</h4>
+  <p>role :- {{ item.roles }}</p>
+  <button (click)="editUser(item)">Edit</button>
+  <button (click)="deleteUser(item.id)">Delete</button>
+</div>
+
+<div>
+  <pagination-controls
+    previousLabel="Prev"
+    nextLebel="Next"
+    (pageChange)="onTableDataChange($event)"
+  >
+  </pagination-controls>
+</div>
+<!-- <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page">
+</mat-paginator> -->
