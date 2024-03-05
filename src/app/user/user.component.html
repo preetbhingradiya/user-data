@@ -13,7 +13,7 @@
         <option value="User">User</option>
         <option value="Admin">Admin</option>
     </select><br><br>
-    <button  (click)="submitData()">Submitt</button>
+    <button  (click)="submitData()" [disabled]="fromData.invalid">Submitt</button>
 </form>
 
 
