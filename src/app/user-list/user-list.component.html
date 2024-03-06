@@ -1,10 +1,19 @@
 <div>
     <h2>Filter </h2>
+    <label>Search name :- </label>
 <input
   type="text"
   placeholder="Enter User name :-"
   (input)="search(ele)"
   #ele
+/>
+
+<label>Search email :- </label>
+<input
+  type="text"
+  placeholder="Enter User name :-"
+  (input)="searchEmail(element)"
+  #element
 />
 </div>
 
@@ -31,8 +40,3 @@
   >
   </pagination-controls>
 </div>
-<!-- <mat-paginator [length]="100"
-              [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]"
-              aria-label="Select page">
-</mat-paginator> -->

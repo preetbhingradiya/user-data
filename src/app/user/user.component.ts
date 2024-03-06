@@ -16,6 +16,27 @@ export class UserComponent implements OnInit {
   fromData:FormGroup
   userService:UserService = inject(UserService)
 
+  isShow:boolean=false
+
+  editTheUsername:string
+  editTheEmail:string;
+  editTheRole:string
+  id:string
+
+  updatedUser(data:any){
+    this.editTheUsername=data
+    this.isShow=true
+  }
+  updatedEmail(data:any){
+    this.editTheEmail=data
+  }
+  updatedRole(data:any){
+    this.editTheRole=data
+  }
+  newId(id:any){
+    this.id=id
+  }
+
   constructor(private fromBuider:FormBuilder) { }
 
 
@@ -31,6 +52,14 @@ export class UserComponent implements OnInit {
     this.userService.postUser(this.fromData.value).subscribe((res)=>{
       console.log(res);
     })
+    window.location.reload()
+  }
+
+  EditData(){
+    this.userService.updatedUser(this.id,this.fromData.value).subscribe((res)=>{
+      return res;
+    })
+    window.location.reload()
   }
 
   get usernameValidation() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { UserService } from '../user.service';
 import { User } from '../model/user-model';
 import Swal from 'sweetalert2';
@@ -17,6 +17,11 @@ export class UserListComponent implements OnInit {
   tableSize:number =10;
   tableSizes:any =[5,10,15,20];
 
+  @Output() EditName:EventEmitter<string>=new EventEmitter<string>();
+  @Output() EditEmail:EventEmitter<string>=new EventEmitter<string>();
+  @Output() EditRole:EventEmitter<string>=new EventEmitter<string>();
+  @Output() id:EventEmitter<string>=new EventEmitter<string>();
+
   userService:UserService =inject(UserService);
   constructor() { }
 
@@ -26,6 +31,15 @@ export class UserListComponent implements OnInit {
       let user= res.filter((val)=>val.username.startsWith(this.searchUser))
       this.userList = user
     })
+    console.log(this.searchUser);
+  }
+
+  searchEmail(value:any){
+    this.searchUser=value.value
+    this.userService.getUser().subscribe((res:User[])=>{
+      let user= res.filter((val)=>val.email.startsWith(this.searchUser))
+      this.userList = user
+    }) 
   }
 
   ngOnInit(): void {
@@ -40,36 +54,34 @@ export class UserListComponent implements OnInit {
   }
 
   editUser(data:User){
-    Swal.fire({
-      title: "Submit your Github username",
-      input: "text",
-      inputValue:`${data.username}`,
-      showCancelButton: true,
-      confirmButtonText: "updated",
-      showLoaderOnConfirm: true,
-      preConfirm: async (login) => {
-        try {
-         this.userService.updatedUser(data.id,{...data}).subscribe((res)=>{     
-          this.allUser()
-          return res
-         })
-          console.log(data.id);
-        } catch (error) {
-          Swal.showValidationMessage(`
-            Request failed: ${error}
-          `);
-        }
-      },
-      allowOutsideClick: () => !Swal.isLoading()
-    })
+    this.EditName.emit(data.username)
+    this.EditEmail.emit(data.email)
+    this.EditRole.emit(data.roles)
+    this.id.emit(data.id)
   }
 
   deleteUser(id:string){
-    this.userService.deleteUser(id).subscribe((res)=>{
-      this.ngOnInit()
-      return res;
-    })
-    // console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userService.deleteUser(id).subscribe((res)=>{
+          this.ngOnInit()
+          return res;
+        })
+        Swal.fire({
+          title: "Deleted!",
+          text: "User has been deleted successfull",
+          icon: "success"
+        });
+      }
+    });
   }
 
   onTableDataChange(event:any){
